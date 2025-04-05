@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Nunito } from "next/font/google";
+import Header from "@/components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const  nunito=Nunito({
+  subsets:["latin"],
+  weight:["300","400","500","600","700"],
+  variable:"--font-nunito"
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,11 +29,12 @@ export default function RootLayout({
       </head>
       <ClerkProvider>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nunito.className} antialiased`}
       >
-        
+    <Header/>
+    <main className="py-8 mx-[15rem] xl:mx-[25rem] h-full">
         {children}
-       
+        </main>
       </body>
       </ClerkProvider>
     </html>

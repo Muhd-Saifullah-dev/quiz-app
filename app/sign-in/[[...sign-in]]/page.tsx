@@ -4,7 +4,7 @@ import React from 'react'
 function page() {
   return (
     <main className='h-[100vh] flex items-center justify-center'>
-        <SignIn/>
+        <SignIn path='/sign-in' signUpUrl='/sign-up'/>
     </main>
   )
 }
