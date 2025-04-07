@@ -32,7 +32,7 @@ export default function RootLayout({
       <ContextProvider>
         
       <body
-        className={`${nunito.className} antialiased`}
+        className={`${nunito.variable} antialiased`}
       >
     <Header/>
     <main className="py-8 mx-[15rem] xl:mx-[25rem] h-full">
