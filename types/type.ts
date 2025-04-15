@@ -8,7 +8,7 @@ interface ICategory{
 
 interface IQuiz{
     id:string,
-    name:string,
+    title:string,
     description?:string | null,
     image?:string | null,
     categoryId:string,

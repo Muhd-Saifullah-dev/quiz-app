@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${nunito.variable} antialiased`}
       >
     <Header/>
-    <main className="py-8 mx-[15rem] xl:mx-[25rem] h-full">
+    <main className="py-8 mx-[5rem] xl:mx-[15rem] h-full">
         {children}
         </main>
       </body>
