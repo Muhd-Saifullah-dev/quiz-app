@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Nunito } from "next/font/google";
 import Header from "@/components/Header";
 import ContextProvider from "@/Providers/ContextProvider";
-
+import { Toaster } from 'react-hot-toast'
 const  nunito=Nunito({
   subsets:["latin"],
   weight:["300","400","500","600","700"],
@@ -34,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} antialiased`}
       >
+        <Toaster position="top-center"/>
     <Header/>
     <main className="py-8 mx-[5rem] xl:mx-[15rem] h-full">
         {children}

@@ -15,7 +15,11 @@ interface IQuiz{
     questions: IQuestion[],
 
 }
-
+interface IResponse {
+    questionId: string;
+    optionId: string;
+    isCorrect: boolean;
+  }
 
 interface IQuestion{
     id:string,
@@ -29,4 +33,4 @@ interface IOption{
     isCorrect:boolean
 }
 
-export type {ICategory,IOption,IQuestion,IQuiz}
+export type {ICategory,IOption,IQuestion,IQuiz,IResponse}

@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image';
 import { dots } from '@/utils/icons.utils';
 import { useRouter } from 'next/navigation';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 
     interface QuizCardProps {
@@ -12,10 +13,13 @@ import { useRouter } from 'next/navigation';
 
 function QuizCard({quiz}:QuizCardProps) {
   const router=useRouter()
-
+  const {setSelectedQuiz }=useGlobalContext()
   const handleClick=()=>{
+    setSelectedQuiz(quiz)
     router.push(`/quiz/setup/${quiz.id}`)
   }
+
+  
   return (
     <div className="border-2   rounded-xl p-1 cursor-pointer shadow-[0_.3rem_0_0_rgba(0,0,0,0.1)] 
     hover:translate-y-1 transition-transform duration-300 ease-in-out"
