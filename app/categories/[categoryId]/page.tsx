@@ -31,7 +31,7 @@ async function page({ params }: any) {
       id: "asc",
     },
   });
-  console.log("quizees :: ", quizzes);
+
   return (
     <div>
       <h1 className="mb-6 text-4xl font-bold">All Quizzes</h1>

@@ -35,12 +35,12 @@ function page() {
 
   const startQuiz=async()=>{
     const seletedQuestion=selectedquiz?.questions.slice(0,quizsetup?.questionCount).filter((q:{difficulty:string})=>{
-      return quizsetup?.difficulty || q.difficulty.toLowerCase() === selectedquiz?.difficulty.toLowerCase()
+      return quizsetup?.difficulty || q.difficulty.toLowerCase() === selectedquiz?.difficulty
     })
     if(seletedQuestion.length > 0){
       try {
         await axios.post(`/api/user/quiz/start`,{
-          CategoryId:selectedquiz?.categoryId,
+          categoryId: selectedquiz?.categoryId,
           quizId:selectedquiz?.id
         })
       } catch (error) {

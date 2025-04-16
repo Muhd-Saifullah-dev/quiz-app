@@ -19,8 +19,8 @@ export async function POST(req:NextRequest,res:NextResponse){
         let stat=await prisma.categoryStats.findUnique({
             where:{
                 userId_categoryId:{
+                    userId,
                     categoryId,
-                    userId
                 }
             }
         })
