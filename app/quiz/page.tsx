@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 function page() {
   const router = useRouter();
-  const { selectedquiz, quizsetup, setQuizSetup, setQuizResponse } =
+  const { selectedquiz, quizsetup, setQuizSetup, setQuizResponse,filteredCategory } =
     useGlobalContext();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeQuestion, setActiveQuestion] = useState(null) as any;
@@ -34,21 +34,9 @@ function page() {
   // shuffle question when the quiz started
 
   useEffect(() => {
-    const filterQuestions = selectedquiz.questions
-      .filter((q: { difficulty: string }) => {
-        // Add null checks and case-insensitive comparison
-        const questionDifficulty = q.difficulty?.toLowerCase() || '';
-        const setupDifficulty = quizsetup.difficulty?.toLowerCase() || '';
-        
-        return (
-          !quizsetup.difficulty ||
-          quizsetup.difficulty === "unspecified" ||
-          questionDifficulty === setupDifficulty
-        );
-      })
-      .slice(0, quizsetup?.questionCount || 0);
+    const allQuestions=filteredCategory.slice(0, quizsetup?.questionCount || 0);
   
-    setShuffledQuestion(ShuffledArrays([...filterQuestions]));
+    setShuffledQuestion(ShuffledArrays([...allQuestions]));
   }, [selectedquiz, quizsetup]);
 
   const ShuffledArrays = (array: any[]) => {
@@ -128,7 +116,7 @@ function page() {
     }
 
   return (
-    <div className="py-[2.5rem]">
+    <div className="py-[2.5rem] pb-[8rem]">
       {shuffledQuestion[currentIndex] ? (
         <div className="space-y-6">
           <div className="flex flex-col gap-6">
@@ -164,7 +152,7 @@ function page() {
         <p className="text-lg">No Question found for this quiz</p>
       )}
 
-      <div className="w-full py-[4rem] fixed bottom-0 left-0 border-t-2 flex items-center justify-center">
+      <div className="w-full py-[2rem] fixed bottom-0 left-0 border-t-2 bg-white flex items-center justify-center">
         <Button
         onClick={()=>{if(currentIndex<shuffledQuestion.length-1){
             if(activeQuestion?.id){

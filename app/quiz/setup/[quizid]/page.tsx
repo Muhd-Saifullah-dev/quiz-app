@@ -13,13 +13,27 @@ import toast from 'react-hot-toast'
 
 
 function page() {
-  const {quizsetup,setQuizSetup,selectedquiz }=useGlobalContext();
+  const {quizsetup,setQuizSetup,selectedquiz,filteredCategory,setFilteredQuestions }=useGlobalContext();
   const router=useRouter()
   useEffect(()=>{
     if(!selectedquiz){
       router.push("/")
     }
   },[selectedquiz,router])
+
+
+  useEffect(()=>{
+    const filterQuestions=selectedquiz?.questions.filter((q:{difficulty:string})=>{
+      return (
+        !quizsetup?.difficulty ||
+        quizsetup?.difficulty==="unspecified" ||
+        q?.difficulty.toLowerCase()===quizsetup?.difficulty.toLowerCase()
+      )
+    })
+
+
+    setFilteredQuestions(filterQuestions)
+  },[quizsetup])
 
   const handleQuestionChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
     const value =parseInt(e.target.value,10)

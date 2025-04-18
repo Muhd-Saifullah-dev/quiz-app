@@ -43,4 +43,8 @@ interface ICategoryStats {
   category:ICategory;
 }
 
-export type { ICategory, IOption, IQuestion, IQuiz, IResponse,ICategoryStats };
+interface ProtectOptions {
+  userId?: string;
+}
+
+export type { ICategory, IOption, IQuestion, IQuiz, IResponse,ICategoryStats,ProtectOptions  };

@@ -17,6 +17,7 @@ export const GlobalContextProvider = ({ children }) => {
    })
    const [selectedquiz,setSelectedQuiz]=useState(null)
    const [quizResponse,setQuizResponse]=useState([])
+   const [filteredCategory,setFilteredQuestions]=useState([])
 
    useEffect(() => {
     // Wait until auth state is fully loaded
@@ -50,7 +51,7 @@ export const GlobalContextProvider = ({ children }) => {
 
     return (
         <GlobalContext.Provider value={{
-            loading,categories,quizsetup,setQuizSetup,selectedquiz,setSelectedQuiz,quizResponse,setQuizResponse
+            loading,categories,quizsetup,setQuizSetup,selectedquiz,setSelectedQuiz,quizResponse,setQuizResponse,filteredCategory,setFilteredQuestions
 
         }}>
             {children}

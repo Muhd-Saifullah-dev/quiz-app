@@ -28,35 +28,20 @@ import { formatedTime } from '@/utils/formatedTime'
 
 function CategoryBarChart({categoryData}:Props) {
     const chartData = [
-        { browser: "attempts", value:categoryData.attempts, fill: "var(--color-chrome)" },
-        { browser: "completed", value:categoryData.completed, fill: "var(--color-safari)" },
+        { key: "attempts", value:categoryData.attempts, fill: "var(--blue-400)" },
+        { key: "completed", value:categoryData.completed, fill: "var(--green-400)" },
         
       ]
       const chartConfig = {
-        visitors: {
+        attempts: {
           label: "Attempts",
           color: "hsl(var(--chart-1))",
         },
-        chrome: {
+       completed: {
           label: "Completed",
           color: "hsl(var(--chart-2))",
         },
-        safari: {
-          label: "Safari",
-          color: "hsl(var(--chart-2))",
-        },
-        firefox: {
-          label: "Firefox",
-          color: "hsl(var(--chart-3))",
-        },
-        edge: {
-          label: "Edge",
-          color: "hsl(var(--chart-4))",
-        },
-        other: {
-          label: "Other",
-          color: "hsl(var(--chart-5))",
-        },
+      
       } satisfies ChartConfig
   return (
     <Card className='border-2 shadow-[0_.3rem_0_0_rgba(0,0,0,0.1)]'>
@@ -67,7 +52,7 @@ function CategoryBarChart({categoryData}:Props) {
     <CardContent>
       <ChartContainer config={chartConfig}>
         <BarChart accessibilityLayer data={chartData}>
-          <CartesianGrid vertical={false} />
+        
           <XAxis
             dataKey="key"
             tickLine={false}
@@ -102,7 +87,7 @@ function CategoryBarChart({categoryData}:Props) {
       </ChartContainer>
     </CardContent>
     <CardFooter className="flex-col items-start gap-2 text-sm">
-      <div className="flex gap-2 font-medium leading-none">
+      <div className="flex gap-2 font-semibold text-muted-foreground">
        Attempts on {formatedTime(categoryData.lastAttempt)} <TrendingUp className="h-4 w-4" />
       </div>
      

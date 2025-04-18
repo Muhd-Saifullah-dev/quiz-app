@@ -6,7 +6,8 @@ import Image from "next/image";
 import { formatedTime } from "@/utils/formatedTime";
 import { checkAbc, crosshairs } from "@/utils/icons.utils";
 import CategoryBarChart from "./CategoryBarChart";
-
+import { Table,TableBody,TableCell,TableHead,TableHeader, TableRow } from "./ui/table";
+import { ICategoryStats } from "@/types/type";
 
 function UserState({ userState }: any) {
   interface ClerkUser {
@@ -36,6 +37,10 @@ const totalAttempts = userState?.categoryStats.reduce(
     (acc: number, curr: any) => acc + curr.completed,
     0
   );
+
+  const latestStats=userState.categoryStats.slice(0,2).sort((a:any,b:any)=>{
+    return new Date(b.lastAttempt).getTime() - new Date(a.lastAttempt).getTime()
+  })
   return (
     <div className="flex flex-col gap-4">
       <div className="h-[15rem] px-8 flex items-center justify-center border-2 rounded-xl shadow-[0_.3rem_0_0_rgba(0,0,0,0.1)]">
@@ -81,10 +86,38 @@ const totalAttempts = userState?.categoryStats.reduce(
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-6">
-        {userState?.categoryStats.map((category:any,index:number)=>(
+        {latestStats.map((category:any,index:number)=>(
           <CategoryBarChart key={index} categoryData={category} />
         ))}
       </div>
+        <div className="mt-4">
+          <h1 className="font-bold text-2xl">Detailed Category Stats</h1>
+          <p className="text-muted-foreground">Breakdown of performance by category</p>
+        </div>
+        <div className="border-2 rounded-lg  shadow-[0._3rem_0_0_rgba(0,0,0,0.1)]">
+          <Table>
+              <TableHeader className="text-center">
+                <TableRow>
+                  <TableHead className="text-center">Category</TableHead>
+                  <TableHead className="text-center">Attempts</TableHead>
+                  <TableHead className="text-center">Completed</TableHead>
+                  <TableHead className="text-center">Average Score</TableHead>
+                  <TableHead className="text-center">last Attempt</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {userState.categoryStats.map((category:ICategoryStats)=>(
+                  <TableRow key={category.id} className="text-center">
+                  <TableCell className="font-semibold py-4 ">{category.category.name}</TableCell>
+                  <TableCell className="font-semibold ">{category.attempts}</TableCell>
+                  <TableCell className="font-semibold  ">{category.completed}</TableCell>
+                  <TableCell className="font-semibold  ">{category.averageScore!==null?category.averageScore.toFixed(2):"N/A"}</TableCell>
+                  <TableCell className="font-semibold  ">{formatedTime(category.lastAttempt)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            </div>
     </div>
   );
 }
